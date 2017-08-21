@@ -110,7 +110,7 @@
     			      <i class="fa fa-gear icon"></i>
     			      Settings
     			    </a>
-                                    <div class="dropdown-divider"></div> <a class="dropdown-item" href="login.php">
+                                    <div class="dropdown-divider"></div> <a class="dropdown-item" href="logout.php">
     			      <i class="fa fa-power-off icon"></i>
     			      Logout
     			    </a> </div>
@@ -126,14 +126,22 @@
                         </div>
                         <nav class="menu">
                             <ul class="nav metismenu" id="sidebar-menu">
-                                <li class="active"> <a href="index.php">
+                                <li class="active"> <a href="dashboard.php">
     						<i class="fa fa-home"></i> Dashboard
     					</a> </li>
-                                <li><a href="users.php"><i class="fa fa-users"></i> Users</a></li>
-                                <li> <a href="">
-    						<i class="fa fa-th-large"></i> Items Manager
-    						<i class="fa arrow"></i>
-    					</a>
+                                <li><a href=""><i class="fa fa-users"></i> Users<i class="fa arrow"></i></a>
+                                    <ul>
+                                        <li><a href="add-user.php">Add Users</a></li>
+                                        <li><a href="users.php">Manage Users</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href=""><i class="fa fa-exclamation-triangle"></i> Alerts<i class="fa arrow"></i></a>
+                                    <ul>
+                                        <li><a href="newalert.php">New Alert</a></li>
+                                        <li><a href="alerthistory.php">Alert History</a></li>
+                                    </ul>
+                                </li>
+                                <li> <a href=""><i class="fa fa-th-large"></i> Items Manager<i class="fa arrow"></i></a>
                                     <ul>
                                         <li> <a href="items-list.php">
     								Items List
@@ -199,10 +207,10 @@
     						<i class="fa arrow"></i>
     					</a>
                                     <ul>
-                                        <li> <a href="login.php">
+                                        <li> <a href="index.php">
     								Login
     							</a> </li>
-                                        <li> <a href="signup.php">
+                                        <li> <a href="register.php">
     								Sign Up
     							</a> </li>
                                         <li> <a href="reset.php">
