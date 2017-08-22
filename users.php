@@ -1,3 +1,22 @@
+<?php
+
+// User Table
+
+// Start Session
+session_start();
+
+// Include db connection
+require('includes/connect.php');
+
+// Select all users in a descending order with their ID
+$sql = "SELECT * FROM wx_users ORDER BY id DESC";
+$query = $pdo->prepare($sql);
+
+// Execute
+$query->execute();
+
+?>
+
 <?php include('header.php'); ?>
 
                 <article class="content responsive-tables-page">
@@ -15,6 +34,7 @@
                                                     <thead class="flip-header">
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Email</th>
                                                             <th>Business</th>
                                                             <th>Phone</th>
                                                             <th>Date</th>
@@ -22,90 +42,24 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                        
+                                                        <?php
+                                                        // Store Result
+                                                        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                                                        ?>
                                                         <tr class="odd gradeX">
-                                                            <td>Trident</td>
-                                                            <td>Internet Explorer 4.0</td>
-                                                            <td>Win 95+</td>
-                                                            <td class="center">4</td>
-                                                            <td class="center">X</td>
+                                                            <td><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['business']; ?></td>
+                                                            <td><?php echo $row['phone']; ?></td>
+                                                            <td><?php echo $row['email']; ?></td>
+                                                            <td class="center"><?php echo $row['date'] ?></td>
+                                                            <td class="center"><a href="#"><i class=" fa fa-pencil" style="text-align:center;"></i></a>  <a href="#"><i class="fa fa-times" style="padding-left: 15px;"></i></a></td>
                                                         </tr>
-                                                        <tr class="even gradeC">
-                                                            <td>Trident</td>
-                                                            <td>Internet Explorer 5.0</td>
-                                                            <td>Win 95+</td>
-                                                            <td class="center">5</td>
-                                                            <td class="center">C</td>
-                                                        </tr>
-                                                        <tr class="odd gradeA">
-                                                            <td>Trident</td>
-                                                            <td>Internet Explorer 5.5</td>
-                                                            <td>Win 95+</td>
-                                                            <td class="center">5.5</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="even gradeA">
-                                                            <td>Trident</td>
-                                                            <td>Internet Explorer 6</td>
-                                                            <td>Win 98+</td>
-                                                            <td class="center">6</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="odd gradeA">
-                                                            <td>Trident</td>
-                                                            <td>Internet Explorer 7</td>
-                                                            <td>Win XP SP2+</td>
-                                                            <td class="center">7</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="even gradeA">
-                                                            <td>Trident</td>
-                                                            <td>AOL browser (AOL desktop)</td>
-                                                            <td>Win XP</td>
-                                                            <td class="center">6</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Firefox 1.0</td>
-                                                            <td>Win 98+ / OSX.2+</td>
-                                                            <td class="center">1.7</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Firefox 1.5</td>
-                                                            <td>Win 98+ / OSX.2+</td>
-                                                            <td class="center">1.8</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Firefox 2.0</td>
-                                                            <td>Win 98+ / OSX.2+</td>
-                                                            <td class="center">1.8</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Firefox 3.0</td>
-                                                            <td>Win 2k+ / OSX.3+</td>
-                                                            <td class="center">1.9</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Camino 1.0</td>
-                                                            <td>OSX.2+</td>
-                                                            <td class="center">1.8</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
-                                                        <tr class="gradeA">
-                                                            <td>Gecko</td>
-                                                            <td>Camino 1.5</td>
-                                                            <td>OSX.3+</td>
-                                                            <td class="center">1.8</td>
-                                                            <td class="center">A</td>
-                                                        </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                     
                                                     </tbody>
                                                 </table>
                                             </div>
