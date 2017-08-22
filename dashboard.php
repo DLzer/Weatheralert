@@ -1,3 +1,11 @@
+<?php 
+
+if ($_SESSION['logged'] = true) {
+
+?>
+
+
+
 <?php include('header.php');?>
 
                 <article class="content dashboard-page">
@@ -881,3 +889,9 @@
         </div>
 
 <?php include('footer.php');?>
+
+<?php
+} else {
+    header('Location: index.php');
+}
+?>
