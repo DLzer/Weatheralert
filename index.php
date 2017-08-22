@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -30,11 +29,6 @@
     </head>
 
     <body>
-    <?php
-        if (isset($_GET['error'])) {
-            echo '<p class="error">Error Logging In!</p>';
-        }
-        ?> 
         <div class="auth">
             <div class="auth-container">
                 <div class="card">
@@ -45,7 +39,7 @@
                     <div class="auth-content">
                         <p class="text-xs-center">LOGIN TO CONTINUE</p>
                         <!--Form-->
-                        <form id="login-form" action="includes/process_login.php" method="POST" novalidate="">
+                        <form id="login-form" action="dashboard.php" method="POST" novalidate="">
                             <div class="form-group"> <label for="username">Username</label> <input type="email" class="form-control underlined" name="email" id="user" placeholder="Your Email" required> </div>
                             <div class="form-group"> <label for="password">Password</label> <input type="password" class="form-control underlined" name="password" id="password" placeholder="Your password" required> </div>
                             <div class="form-group"> <label for="remember">
