@@ -1,21 +1,5 @@
 <?php include('header.php');?>
 
-<?php
-
-include('includes/connect.php');
-include('includes/functions.php');
-
-sec_session_start(); 
-if(my_login_check($mysqli) == true) {
-        // Add your protected page content here!
-} else { 
-        echo 'You are not authorized to access this page, please login.';
-}
-
-?>
-
-
-
                 <article class="content dashboard-page">
                     <section class="section">
                         <div class="row sameheight-container">
@@ -29,8 +13,6 @@ if(my_login_check($mysqli) == true) {
             				</a> </p>
                                         </div>
                                         <div class="row row-sm stats-container">
-                                            <?php echo $POST['username']; ?><br>
-                                            <?php echo $POST['email']; ?><br>
                                             <div class="col-xs-12 col-sm-6 stat-col">
                                                 <div class="stat-icon"> <i class="fa fa-rocket"></i> </div>
                                                 <div class="stat">
