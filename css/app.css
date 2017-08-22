@@ -27,6 +27,10 @@ body {
   color: #4f5f6f;
   overflow-x: hidden; }
 
+.index-body {
+  background-color: #fff !important;
+}
+
 .main-wrapper {
   width: 100%;
   position: absolute;
