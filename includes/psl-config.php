@@ -2,13 +2,9 @@
 /**
  * These are the database login details
  */  
-define("HOST", "localhost");     // The host you want to connect to.
-define("USER", "root");    // The database username. 
-define("PASSWORD", "root");    // The database password. 
-define("DATABASE", "weather_alert");    // The database name.
- 
-define("CAN_REGISTER", "any");
-define("DEFAULT_ROLE", "member");
- 
-define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+$dbhost = 'localhost';
+$dbname = 'weather_alert';
+$dbuser = 'root';
+$passwd = 'root';
+
 ?>
