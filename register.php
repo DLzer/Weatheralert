@@ -1,7 +1,68 @@
 <?php
-include_once 'includes/register.inc.php';
-include_once 'includes/functions.php';
+
+ini_set('display_errors', 1);
+
+session_start();
+require_once 'includes/class.user.php';
+
+$reg_user = new USER();
+
+if($reg_user->is_logged_in()!="")
+{
+ $reg_user->redirect('dashboard.php');
+}
+
+
+if(isset($_POST['submit']))
+{
+ $uname = trim($_POST['txtuname']);
+ $email = trim($_POST['txtemail']);
+ $upass = trim($_POST['txtpass']);
+ $code = md5(uniqid(rand()));
+ 
+ $stmt = $reg_user->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
+ $stmt->execute(array(":email_id"=>$email));
+ $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+ if($stmt->rowCount() > 0)
+ {
+  $msg = "
+        <div class='alert alert-error'>
+    <button class='close' data-dismiss='alert'>&times;</button>
+     <strong>Sorry !</strong>  email allready exists , Please Try another one
+     </div>
+     ";
+ }
+ else
+ {
+  if($reg_user->register($uname,$email,$upass,$code))
+  {   
+   $id = $reg_user->lasdID();  
+   $key = base64_encode($id);
+   $id = $key;
+   
+   $message = "     
+      Hello $uname,
+      <br /><br />
+      Welcome to Coding Cage!<br/>
+      To complete your registration  please , just click following link<br/>
+      <br /><br />
+      <a href='http://www.SITE_URL.com/verify.php?id=$id&code=$code'>Click HERE to Activate :)</a>
+      <br /><br />
+      Thanks,";
+      
+   $subject = "Confirm Registration";
+      
+  }
+  else
+  {
+   echo "sorry , Query could no execute...";
+  }  
+ }
+}
 ?>
+       
+
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -41,21 +102,17 @@ include_once 'includes/functions.php';
                     </header>
                     <div class="auth-content">
                         <p class="text-xs-center">SIGNUP TO GET INSTANT ACCESS</p>
-                        <?php
-                            if (!empty($error_msg)) {
-                            echo $error_msg;
-                        }
-                        ?>
-                        <form id="signup-form" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="GET" novalidate="">
+
+                        <form id="signup-form" action="" method="POST" novalidate="">
                             <div class="form-group"> <label for="firstname">Username</label>
                                 <div class="row">
-                                    <div class="col-sm-6"> <input type="text" class="form-control underlined" name="username" id="firstname" placeholder="Enter Username" required=""> </div>
+                                    <div class="col-sm-6"> <input type="text" class="form-control underlined" name="txtuname" id="firstname" placeholder="Enter Username" required=""> </div>
                                 </div>
                             </div>
-                            <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control underlined" name="email" id="email" placeholder="Enter email address" required=""> </div>
+                            <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control underlined" name="txtemail" id="email" placeholder="Enter email address" required=""> </div>
                             <div class="form-group"> <label for="password">Password</label>
                                 <div class="row">
-                                    <div class="col-sm-6"> <input type="password" class="form-control underlined" name="password" id="password" placeholder="Enter password" required=""> </div>
+                                    <div class="col-sm-6"> <input type="password" class="form-control underlined" name="textupass" id="password" placeholder="Enter password" required=""> </div>
                                     <div class="col-sm-6"> <input type="password" class="form-control underlined" name="retype_password" id="retype_password" placeholder="Re-type password" required=""> </div>
                                 </div>
                             </div>
@@ -63,11 +120,7 @@ include_once 'includes/functions.php';
             <input class="checkbox" name="agree" id="agree" type="checkbox" required=""> 
             <span>Agree the terms and <a href="#">policy</a></span>
           </label> </div>
-                            <div class="form-group"> <button type="submit" class="btn btn-block btn-primary" onclick="return regformhash(this.form,
-                                   this.form.username,
-                                   this.form.email,
-                                   this.form.password,
-                                   this.form.confirmpwd);">Sign Up</button> </div>
+                            <div class="form-group"> <button type="submit" class="btn btn-block btn-primary" name="submit">Sign Up</button> </div>
                             <div class="form-group">
                                 <p class="text-muted text-xs-center">Already have an account? <a href="index.php">Login!</a></p>
                             </div>
@@ -87,6 +140,5 @@ include_once 'includes/functions.php';
                 <div class="color-secondary"></div>
             </div>
         </div>
-       
 
 <?php include('footer.php'); ?>
