@@ -1,7 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-
 //Start the session
 session_start();
 
