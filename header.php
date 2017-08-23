@@ -1,6 +1,9 @@
-<!doctype html>
+
 
 <?php session_start(); ?>
+
+<!doctype html>
+
 
 <html class="no-js" lang="en">
 
@@ -98,7 +101,7 @@
                             <li class="profile dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/22087888?v=4&s=40')"> </div> <span class="name">
-    			      Dillon Lomnitzer
+    			      <?php echo $_SESSION['username']; ?>
     			    </span> </a>
                                 <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1"> <a class="dropdown-item" href="#">
     			      <i class="fa fa-user icon"></i>

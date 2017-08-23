@@ -13,9 +13,6 @@ if(isset($_POST['submit'])) {
     $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
     $password = !empty($_POST['password']) ? trim($_POST['password']) : null;
     $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
-    $fullname = !empty($_POST['fullname']) ? trim($_POST['fullname']) : null;
-    $business = !empty($_POST['business']) ? trim($_POST['business']) : null;
-    $phone = !empty($_POST['phone']) ? trim($_POST['phone']) : null;
 
     // Add ERROR checking HERE
 

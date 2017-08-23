@@ -1,8 +1,5 @@
 <?php
 
-//Start the session
-session_start();
-
 // Inlcude database connection
 require 'includes/connect.php';
 
@@ -40,7 +37,7 @@ if(isset($_POST['submit'])) {
     }
 
     //Hash the password
-    $passwordHash = password_hash($pass, PASSWORD_BCRYPT, array("cost" => 12));
+    $passwordHash = password_hash($password, PASSWORD_BCRYPT, array("cost" => 12));
 
     //Prepare our INSERT statement
     $sql = "INSERT INTO wx_users (date, username, password, email, name, business, phone) VALUES (now(), :username, :password, :email, :fullname, :business, :phone)";
@@ -70,6 +67,17 @@ if(isset($_POST['submit'])) {
 
 
 <?php include('header.php');?>
+
+<?php
+
+// Check for a current user_id and a logged_in variable
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])) {
+    // User is not logged in. Redirect them back to the login page.
+    header('Location: index.php');
+    exit;
+}
+
+?>
 
         <article class="content forms-page">
             <section class="section">

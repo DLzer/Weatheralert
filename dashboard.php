@@ -1,12 +1,15 @@
-<?php 
-
-if ($_SESSION['logged'] = true) {
-
-?>
-
-
 
 <?php include('header.php');?>
+
+<?php
+
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])) {
+    // User is not logged in. Redirect them back to the login page.
+    header('Location: index.php');
+    exit;
+}
+
+?>
 
                 <article class="content dashboard-page">
                     <section class="section">
@@ -889,9 +892,3 @@ if ($_SESSION['logged'] = true) {
         </div>
 
 <?php include('footer.php');?>
-
-<?php
-} else {
-    header('Location: index.php');
-}
-?>

@@ -1,9 +1,6 @@
 <?php
 
-// User Table
-
-// Start Session
-session_start();
+// User Tablec
 
 // Include db connection
 require('includes/connect.php');
@@ -18,6 +15,16 @@ $query->execute();
 ?>
 
 <?php include('header.php'); ?>
+
+<?php
+
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])) {
+    // User is not logged in. Redirect them back to the login page.
+    header('Location: index.php');
+    exit;
+}
+
+?>
 
                 <article class="content responsive-tables-page">
                     <section class="section">
@@ -48,10 +55,10 @@ $query->execute();
                                                         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
                                                         <tr class="odd gradeX">
-                                                            <td><?php echo $row['name']; ?></td>
-                                                            <td><?php echo $row['business']; ?></td>
-                                                            <td><?php echo $row['phone']; ?></td>
+                                                            <td><?php echo $row['name']; ?></td>                                                    
                                                             <td><?php echo $row['email']; ?></td>
+                                                            <td><?php echo $row['business']; ?></td> 
+                                                            <td><?php echo $row['phone']; ?></td>
                                                             <td class="center"><?php echo $row['date'] ?></td>
                                                             <td class="center"><a href="#"><i class=" fa fa-pencil" style="text-align:center;"></i></a>  <a href="#"><i class="fa fa-times" style="padding-left: 15px;"></i></a></td>
                                                         </tr>

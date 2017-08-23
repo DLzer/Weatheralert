@@ -2,9 +2,6 @@
 
 // New Alert
 
-// Start your session
-session_start();
-
 // Display Errors -> DEVELOPMENT ONLY
 ini_set('display_errors', 1);
 
@@ -22,7 +19,7 @@ if(isset($_POST['send-alert'])) {
     $comments = $_POST['comments'];
     $zones = implode(',', $_POST['checkbox']);
     
-    // Prepare you SQL statement
+    // Prepare your SQL statement
     $sql = "INSERT INTO wx_alerts (date, type, zones, comments) VALUES (now(), :alertType, :zones, :comments)";
     $stmt = $pdo->prepare($sql);
 
@@ -33,7 +30,10 @@ if(isset($_POST['send-alert'])) {
 
     // Execute 
     $result = $stmt->execute();
-    
+
+    // Send SMS using Twilio REST API
+    require_once 'sendSms.php';
+
     } else {
         exit;
     }
@@ -47,6 +47,18 @@ if(isset($_POST['send-alert'])) {
 <?php
 include('header.php');
 ?>
+
+<?php
+
+// Check for a current user_id and a logged_in variable
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])) {
+    // User is not logged in. Redirect them back to the login page.
+    header('Location: index.php');
+    exit;
+}
+
+?>
+
                 <article class="content forms-page">
                     <section class="section">
                         <div class="row sameheight-container">

@@ -2,9 +2,6 @@
 
 // User Table
 
-// Start Session
-session_start();
-
 // Include db connection
 require('includes/connect.php');
 
@@ -18,6 +15,17 @@ $query->execute();
 ?>
 
 <?php include('header.php'); ?>
+
+<?php
+
+// Check for a current user_id and a logged_in variable
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])) {
+    // User is not logged in. Redirect them back to the login page.
+    header('Location: index.php');
+    exit;
+}
+
+?>
 
                 <article class="content responsive-tables-page">
                     <section class="section">
