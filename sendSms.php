@@ -9,8 +9,8 @@
     use Twilio\Rest\Client;
 
     // Your Account SID and Auth Token from twilio.com/console
-    $sid = 'AC849b43dee2858f0b1358c8526d75afb9';
-    $token = '8a33bf720e70b35239d44a6814206ce2';
+    $sid = '...';
+    $token = '...';
     $client = new Client($sid, $token);
 
     // Use the client to do fun stuff like send text messages!
@@ -19,7 +19,7 @@
     '+18455449246',
     array(
         // A Twilio phone number you purchased at twilio.com/console
-        'from' => '+19733586042 ',
+        'from' => '+18452344424',
         // the body of the text message you'd like to send
         'body' => "echo $comments"
     )
