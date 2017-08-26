@@ -14,28 +14,28 @@ if(isset($_POST['send-alert'])) {
     // Check if the correct pin number was entered
     if(isset($_POST['pin']) && $_POST['pin'] == '5050') {
 
-    // If SUBMIT exists collect the variables
-    $alertType = $_POST['select_catalog'];
-    $comments = $_POST['comments'];
-    $zones = implode(',', $_POST['checkbox']);
-    
-    // Prepare your SQL statement
-    $sql = "INSERT INTO wx_alerts (date, type, zones, comments) VALUES (now(), :alertType, :zones, :comments)";
-    $stmt = $pdo->prepare($sql);
+        // If SUBMIT exists collect the variables
+        $alertType = $_POST['select_catalog'];
+        $comments = $_POST['comments'];
+        $zones = implode(',', $_POST['checkbox']);
+        
+        // Prepare your SQL statement
+        $sql = "INSERT INTO wx_alerts (date, type, zones, comments) VALUES (now(), :alertType, :zones, :comments)";
+        $stmt = $pdo->prepare($sql);
 
-    // Bind Values
-    $stmt->bindValue(':alertType' , $alertType);
-    $stmt->bindValue(':zones', $zones);
-    $stmt->bindValue(':comments' , $comments);
+        // Bind Values
+        $stmt->bindValue(':alertType' , $alertType);
+        $stmt->bindValue(':zones', $zones);
+        $stmt->bindValue(':comments' , $comments);
 
-    // Execute 
-    $result = $stmt->execute();
+        // Execute 
+        $result = $stmt->execute();
 
-    // Send SMS using Twilio REST API
-    require_once 'sendSms.php';
+        // Send SMS using Twilio REST API
+        require_once 'sendSms.php';
 
     } else {
-        exit;
+        die('Cannot Process Your Request');
     }
 }
 
