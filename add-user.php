@@ -15,7 +15,7 @@ if(isset($_POST['submit'])) {
     $phone = !empty($_POST['phone']) ? trim($_POST['phone']) : null;
 
     // Add ERROR checking HERE
-
+    
     // ^
 
     // Check if supplied username already exsits
